@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .fade-in {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .hover-effect:hover {
+            box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
+            transform: scale(1.05);
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sections = document.querySelectorAll(".fade-in");
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <header class="bg-blue-600 text-white p-6 text-center fade-in">
+        <h1 class="text-3xl font-bold">Mon Portfolio</h1>
+    </header>
+    
+    <section class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md text-center fade-in">
+        <h2 class="text-2xl font-semibold mb-4">Carte d'identité</h2>
+        <p class="text-gray-700"><strong>Nom :</strong> Eloan Saulnier</p>
+        <p class="text-gray-700"><strong>Âge :</strong> 18 ans</p>
+        <p class="text-gray-700"><strong>Profession :</strong> Lycéen</p>
+        <p class="text-gray-700"><strong>Localisation :</strong> St Joachim, France</p>
+    </section>
+    
+    <section id="about" class="max-w-4xl mx-auto p-6 fade-in">
+        <h2 class="text-2xl font-semibold mb-4">À propos de moi</h2>
+        <p class="text-gray-700">Je suis un Lycéen qui aime la création web, musique numérique, Infographie, programmation.</p>
+    </section>
+    
+    <section id="experience" class="max-w-4xl mx-auto p-6 fade-in">
+        <h2 class="text-2xl font-semibold mb-4">Expérience professionnelle</h2>
+        <div class="bg-white p-4 rounded-lg shadow mb-4 hover-effect">
+            <h3 class="text-xl font-bold">Stage 3ème</h3>
+            <p class="text-gray-600">Janvier 2022</p>
+            <p class="text-gray-700">Atelier JHP Couteau Morta Coutellerie</p>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow hover-effect">
+            <h3 class="text-xl font-bold">Stage 1ère</h3>
+            <p class="text-gray-600">Avril 2024</p>
+            <p class="text-gray-700">Idea industrie</p>
+        </div>
+    </section>
+    
+    <section id="projects" class="max-w-4xl mx-auto p-6 fade-in">
+        <h2 class="text-2xl font-semibold mb-4">Mes Projets</h2>
+        <div class="bg-white p-4 rounded-lg shadow mb-4 hover-effect">
+            <h3 class="text-xl font-bold">Projet Dorothée (Terminée)</h3>
+            <p class="text-gray-600">Le projet Dorothée est une affiche faite pour mon père lui qui adore le club Dorothée</p>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow mb-4 hover-effect">
+            <h3 class="text-xl font-bold">Projet MT Automatisme (Terminée)</h3>
+            <p class="text-gray-600">Le projet MT Automatisme est une affiche faite pour l'entreprise MT Automastisme à but publicitaire</p>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow mb-4 hover-effect">
+            <h3 class="text-xl font-bold">Projet Vidéo Espagnol (Terminée)</h3>
+            <p class="text-gray-600">Ce Projet est une vidéo faite pour mes cours d'éspagnol ou j'ai fait le montage de la vidéo</p>
+        </div>
+      <div class="bg-white p-4 rounded-lg shadow mb-4 hover-effect">
+      <h3 class="text-xl font-bold">Projet JOËL(Terminée)</h3>
+            <p class="text-gray-600">Le projet JOËL est une affiche pour l'anniversaire d'un chasseur </p>
+        </div>
+        <p class="text-gray-700 mt-4">Vous pouvez retrouver tous mes projets sur mon Google Drive :</p>
+        <a href="https://drive.google.com/drive/folders/1NxTLybA9hwAHjOs8GtHq57ruXYsxKoD7?usp=drive_link" class="text-blue-500" target="_blank">Accéder à mes projets</a>
+    </section>
+
+    <section id="contact" class="max-w-4xl mx-auto p-6 fade-in">
+        <h2 class="text-2xl font-semibold mb-4">Contact</h2>
+        <p class="text-gray-700">Vous pouvez me contacter à l'adresse email : <a href="mailto:saulniereloanpro@gmail.com" class="text-blue-500">saulniereloanpro@gmail.com</a></p>
+        <p class="text-gray-700">Ou par téléphone : <a href="tel:+33642542146" class="text-blue-500">+33 6 42 54 21 46</a></p>
+    </section>
+</body>
+</html>
