@@ -3,99 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Portfolio Eloan Saulnier</title>
     <style>
-        .fade-in {
+        /* Réinitialisation et polices */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* En-tête */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L100,0 L100,100 L0,100 Z" /></svg>');
+            background-size: cover;
+            opacity: 0.3;
+        }
+        
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        /* Sections */
+        section {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 1s ease-out, transform 1s ease-out;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
-        .fade-in.visible {
+        
+        section.visible {
             opacity: 1;
-            transform: scale(1);
+            transform: translateY(0);
         }
-        .hover-effect:hover {
-            box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
-            transform: scale(1.05);
-            transition: all 0.3s ease-in-out;
+        
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #444;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        section h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 3px;
+        }
+        
+        /* Carte d'identité */
+        .identity-card {
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .identity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .identity-card p {
+            margin: 0.8rem 0;
+            font-size: 1.1rem;
+        }
+        
+        .identity-card strong {
+            color: #667eea;
+        }
+        
+        /* Expérience et projets */
+        .experience-item, .project-item {
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: #f9f9f9;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .experience-item:hover, .project-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid #667eea;
+            background: white;
+        }
+        
+        .experience-item h3, .project-item h3 {
+            font-size: 1.3rem;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+        
+        .experience-item .date, .project-item .status {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            background: #e0e7ff;
+            color: #667eea;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        /* Contact */
+        #contact p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        #contact a {
+            color: #667eea;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        #contact a::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #667eea;
+            transition: width 0.3s ease;
+        }
+        
+        #contact a:hover::after {
+            width: 100%;
+        }
+        
+        /* Boutons et liens */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* Pied de page */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+                margin: 1.5rem;
+            }
+            
+            section h2 {
+                font-size: 1.5rem;
+            }
         }
     </style>
+</head>
+<body>
+    <header>
+        <h1>Portfolio Eloan Saulnier</h1>
+    </header>
+    
+    <section class="identity-card">
+        <h2>Carte d'identité</h2>
+        <p><strong>Nom :</strong> Eloan Saulnier</p>
+        <p><strong>Âge :</strong> 18 ans</p>
+        <p><strong>Profession :</strong> Lycéen</p>
+        <p><strong>Localisation :</strong> St Joachim, France</p>
+    </section>
+    
+    <section id="about">
+        <h2>À propos de moi</h2>
+        <p>Je suis un lycéen passionné par la création web, la musique numérique, l'infographie et la programmation. J'aime créer des designs visuellement attrayants et fonctionnels, et j'apprécie particulièrement le processus de transformation d'une idée en un produit concret.</p>
+    </section>
+    
+    <section id="experience">
+        <h2>Expérience professionnelle</h2>
+        <div class="experience-item">
+            <h3>Stage de 3ème</h3>
+            <span class="date">Janvier 2022</span>
+            <p>Atelier JHP Couteau Morta Coutellerie</p>
+        </div>
+        <div class="experience-item">
+            <h3>Stage de 1ère</h3>
+            <span class="date">Avril 2024</span>
+            <p>Idea industrie</p>
+        </div>
+    </section>
+    
+    <section id="projects">
+        <h2>Mes Projets</h2>
+        <div class="project-item">
+            <h3>Projet Dorothée</h3>
+            <span class="status">Terminé</span>
+            <p>Création d'une affiche pour mon père, grand fan du Club Dorothée, combinant éléments nostalgiques et design moderne.</p>
+        </div>
+        <div class="project-item">
+            <h3>Projet MT Automatisme</h3>
+            <span class="status">Terminé</span>
+            <p>Conception d'une affiche publicitaire pour l'entreprise MT Automatisme, mettant en valeur leurs services avec un design professionnel.</p>
+        </div>
+        <div class="project-item">
+            <h3>Projet Vidéo Espagnol</h3>
+            <span class="status">Terminé</span>
+            <p>Réalisation et montage d'une vidéo pour mes cours d'espagnol, intégrant des effets visuels et une narration fluide.</p>
+        </div>
+        <div class="project-item">
+            <h3>Projet JOËL</h3>
+            <span class="status">Terminé</span>
+            <p>Création d'une affiche d'anniversaire sur le thème de la chasse, personnalisée pour le destinataire.</p>
+        </div>
+        
+        <p>Vous pouvez retrouver tous mes projets sur mon Google Drive :</p>
+        <a href="https://drive.google.com/drive/folders/1NxTLybA9hwAHjOs8GtHq57ruXYsxKoD7?usp=drive_link" class="btn" target="_blank">Voir mes projets</a>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Vous pouvez me contacter à l'adresse email : <a href="mailto:saulniereloanpro@gmail.com">saulniereloanpro@gmail.com</a></p>
+        <p>Ou par téléphone : <a href="tel:+33642542146">+33 6 42 54 21 46</a></p>
+    </section>
+    
+    <footer>
+        <p>© 2024 Portfolio Eloan Saulnier - Tous droits réservés</p>
+    </footer>
+
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const sections = document.querySelectorAll(".fade-in");
-            const observer = new IntersectionObserver(entries => {
+        // Animation au défilement
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
+                        entry.target.classList.add('visible');
                     }
                 });
-            }, { threshold: 0.1 });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
             
             sections.forEach(section => {
                 observer.observe(section);
             });
+            
+            // Animation au survol des éléments
+            const hoverItems = document.querySelectorAll('.experience-item, .project-item, .identity-card');
+            hoverItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transition = 'all 0.3s ease';
+                });
+            });
         });
     </script>
-</head>
-<body class="bg-gray-100 text-gray-900">
-    <header class="bg-blue-600 text-white p-6 text-center fade-in">
-        <h1 class="text-3xl font-bold">Mon Portfolio</h1>
-    </header>
-    
-    <section class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md text-center fade-in">
-        <h2 class="text-2xl font-semibold mb-4">Carte d'identité</h2>
-        <p class="text-gray-700"><strong>Nom :</strong> Eloan Saulnier</p>
-        <p class="text-gray-700"><strong>Âge :</strong> 18 ans</p>
-        <p class="text-gray-700"><strong>Profession :</strong> Lycéen</p>
-        <p class="text-gray-700"><strong>Localisation :</strong> St Joachim, France</p>
-    </section>
-    
-    <section id="about" class="max-w-4xl mx-auto p-6 fade-in">
-        <h2 class="text-2xl font-semibold mb-4">À propos de moi</h2>
-        <p class="text-gray-700">Je suis un Lycéen qui aime la création web, musique numérique, Infographie, programmation.</p>
-    </section>
-    
-    <section id="experience" class="max-w-4xl mx-auto p-6 fade-in">
-        <h2 class="text-2xl font-semibold mb-4">Expérience professionnelle</h2>
-        <div class="bg-white p-4 rounded-lg shadow mb-4 hover-effect">
-            <h3 class="text-xl font-bold">Stage 3ème</h3>
-            <p class="text-gray-600">Janvier 2022</p>
-            <p class="text-gray-700">Atelier JHP Couteau Morta Coutellerie</p>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow hover-effect">
-            <h3 class="text-xl font-bold">Stage 1ère</h3>
-            <p class="text-gray-600">Avril 2024</p>
-            <p class="text-gray-700">Idea industrie</p>
-        </div>
-    </section>
-    
-    <section id="projects" class="max-w-4xl mx-auto p-6 fade-in">
-        <h2 class="text-2xl font-semibold mb-4">Mes Projets</h2>
-        <div class="bg-white p-4 rounded-lg shadow mb-4 hover-effect">
-            <h3 class="text-xl font-bold">Projet Dorothée (Terminée)</h3>
-            <p class="text-gray-600">Le projet Dorothée est une affiche faite pour mon père lui qui adore le club Dorothée</p>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow mb-4 hover-effect">
-            <h3 class="text-xl font-bold">Projet MT Automatisme (Terminée)</h3>
-            <p class="text-gray-600">Le projet MT Automatisme est une affiche faite pour l'entreprise MT Automastisme à but publicitaire</p>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow mb-4 hover-effect">
-            <h3 class="text-xl font-bold">Projet Vidéo Espagnol (Terminée)</h3>
-            <p class="text-gray-600">Ce Projet est une vidéo faite pour mes cours d'éspagnol ou j'ai fait le montage de la vidéo</p>
-        </div>
-      <div class="bg-white p-4 rounded-lg shadow mb-4 hover-effect">
-      <h3 class="text-xl font-bold">Projet JOËL(Terminée)</h3>
-            <p class="text-gray-600">Le projet JOËL est une affiche pour l'anniversaire d'un chasseur </p>
-        </div>
-        <p class="text-gray-700 mt-4">Vous pouvez retrouver tous mes projets sur mon Google Drive :</p>
-        <a href="https://drive.google.com/drive/folders/1NxTLybA9hwAHjOs8GtHq57ruXYsxKoD7?usp=drive_link" class="text-blue-500" target="_blank">Accéder à mes projets</a>
-    </section>
-
-    <section id="contact" class="max-w-4xl mx-auto p-6 fade-in">
-        <h2 class="text-2xl font-semibold mb-4">Contact</h2>
-        <p class="text-gray-700">Vous pouvez me contacter à l'adresse email : <a href="mailto:saulniereloanpro@gmail.com" class="text-blue-500">saulniereloanpro@gmail.com</a></p>
-        <p class="text-gray-700">Ou par téléphone : <a href="tel:+33642542146" class="text-blue-500">+33 6 42 54 21 46</a></p>
-    </section>
 </body>
 </html>
